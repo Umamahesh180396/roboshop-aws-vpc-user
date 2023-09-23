@@ -26,6 +26,12 @@ variable "igw_tags" {
   }
 }
 
+variable "sg_tags" {
+  default = {
+    Name = "roboshop-sg"
+  }
+}
+
 variable "public_subnet_cidr" {
   default = ["10.0.1.0/24","10.0.2.0/24"]
 }
@@ -66,4 +72,24 @@ variable "database_subnet_group_tags" {
   default = {
     Name = "roboshop-database-group"
   }
+}
+
+variable "sg_name" {
+  default = "allow_all_sg"
+}
+
+variable "sg_description" {
+  default = "allow_all_from_internet"
+}
+
+variable "sg_ingress_rules" {
+  default = [
+    {
+      from_port = 0
+      to_port = 0
+      description = "allowing all traffic from internet"
+      protocol = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+  ]
 }
